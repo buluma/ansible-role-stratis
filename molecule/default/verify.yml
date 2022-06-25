@@ -1,0 +1,10 @@
+---
+- name: Verify
+  hosts: all
+  become: yes
+  gather_facts: no
+
+  tasks:
+    - name: stratis version
+      ansible.builtin.command:
+        cmd: stratis --version
