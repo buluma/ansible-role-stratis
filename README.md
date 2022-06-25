@@ -4,7 +4,7 @@ Install stratis and carves pools and filesystems.
 
 |GitHub|GitLab|Quality|Downloads|Version|Issues|Pull Requests|
 |------|------|-------|---------|-------|------|-------------|
-|[![github](https://github.com/buluma/ansible-role-stratis/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-stratis/actions)|[![gitlab](https://gitlab.com/buluma/ansible-role-stratis/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-stratis)|[![quality](https://img.shields.io/ansible/quality/)](https://galaxy.ansible.com/buluma/stratis)|[![downloads](https://img.shields.io/ansible/role/d/)](https://galaxy.ansible.com/buluma/stratis)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-stratis.svg)](https://github.com/buluma/ansible-role-stratis/releases/)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-stratis.svg)](https://github.com/buluma/ansible-role-stratis/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-stratis.svg)](https://github.com/buluma/ansible-role-stratis/pulls/)|
+|[![github](https://github.com/buluma/ansible-role-stratis/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-stratis/actions)|[![gitlab](https://gitlab.com/buluma/ansible-role-stratis/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-stratis)|[![quality](https://img.shields.io/ansible/quality/59566)](https://galaxy.ansible.com/buluma/stratis)|[![downloads](https://img.shields.io/ansible/role/d/59566)](https://galaxy.ansible.com/buluma/stratis)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-stratis.svg)](https://github.com/buluma/ansible-role-stratis/releases/)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-stratis.svg)](https://github.com/buluma/ansible-role-stratis/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-stratis.svg)](https://github.com/buluma/ansible-role-stratis/pulls/)|
 
 ## [Example Playbook](#example-playbook)
 
@@ -18,19 +18,19 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
 
   roles:
     - role: buluma.stratis
-  # It's not easy to test block-devices in CI. That's why the next block
-  # of variables is commented, but left here as an example.
-  #    stratis_pools:
-  #      - name: my_pool
-  #        devices:
-  #          - /dev/vdb
-  #          - /dev/vdc
-  #    stratis_filesystems:
-  #      - name: my_filesystem
-  #        pool: my_pool
-  #    stratis_mounts:
-  #      - mountpoint: /mnt/my_mountpoint
-  #        device: /stratis/my_pool/my_filesystem
+    # It's not easy to test block-devices in CI. That's why the next block
+    # of variables is commented, but left here as an example.
+    #    stratis_pools:
+    #      - name: my_pool
+    #        devices:
+    #          - /dev/vdb
+    #          - /dev/vdc
+    #    stratis_filesystems:
+    #      - name: my_filesystem
+    #        pool: my_pool
+    #    stratis_mounts:
+    #      - mountpoint: /mnt/my_mountpoint
+    #        device: /stratis/my_pool/my_filesystem
 ```
 
 The machine needs to be prepared. In CI this is done using `molecule/default/prepare.yml`:
