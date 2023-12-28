@@ -20,6 +20,8 @@
     name: "{{ stratis_service }}"
     state: started
     enabled: yes
+  tags:
+    - molecule-notest
 
 - name: Create pools
   ansible.builtin.command:
