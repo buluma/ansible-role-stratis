@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased](https://github.com/buluma/ansible-role-stratis/tree/HEAD)
+
+[Full Changelog](https://github.com/buluma/ansible-role-stratis/compare/0.6.26...HEAD)
+
+**Closed issues:**
+
+- Update buluma/todo-to-issue-action@v1.0.1 @buluma [\#9](https://github.com/buluma/ansible-role-stratis/issues/9)
+
 ## [0.6.26](https://github.com/buluma/ansible-role-stratis/tree/0.6.26) (2022-06-25)
 
 [Full Changelog](https://github.com/buluma/ansible-role-stratis/compare/0.6.25...0.6.26)
