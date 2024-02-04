@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.13.0](https://github.com/buluma/ansible-role-stratis/tree/0.13.0) (2024-01-20)
+
+[Full Changelog](https://github.com/buluma/ansible-role-stratis/compare/0.07.24...0.13.0)
+
 ## [0.07.24](https://github.com/buluma/ansible-role-stratis/tree/0.07.24) (2024-01-02)
 
 [Full Changelog](https://github.com/buluma/ansible-role-stratis/compare/0.12.23...0.07.24)
