@@ -1,8 +1,8 @@
 ---
 - name: Prepare
   hosts: all
-  become: yes
-  gather_facts: no
+  become: true
+  gather_facts: false
 
   vars:
     devices:
@@ -34,12 +34,12 @@
       loop: "{{ devices }}"
       loop_control:
         label: "/dev/{{ item.name }}"
-      changed_when: no
+      changed_when: false
 
     - name: loopback device to storage file
       command: losetup /dev/{{ item.name }} /{{ item.name }}
       loop: "{{ devices }}"
-      failed_when: no
+      failed_when: false
       loop_control:
         label: "/dev/{{ item.name }} to /{{ item.name }}"
-      changed_when: no
+      changed_when: false

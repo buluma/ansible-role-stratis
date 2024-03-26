@@ -10,7 +10,7 @@
   ansible.builtin.service:
     name: dbus-broker
     state: started
-    enabled: yes
+    enabled: true
   when:
     - ansible_distribution == "Fedora"
     - ansible_distribution_major_version | int > 33
@@ -19,7 +19,7 @@
   ansible.builtin.service:
     name: "{{ stratis_service }}"
     state: started
-    enabled: yes
+    enabled: true
   tags:
     - molecule-notest
 
@@ -47,7 +47,7 @@
   ansible.builtin.file:
     path: "{{ item.mountpoint }}"
     state: directory
-    recurse: yes
+    recurse: true
     mode: "0755"
   loop: "{{ stratis_mounts }}"
   when:
