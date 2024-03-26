@@ -14,8 +14,8 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 ---
 - name: Converge
   hosts: all
-  become: yes
-  gather_facts: yes
+  become: true
+  gather_facts: true
 
   roles:
     - role: buluma.stratis
@@ -40,8 +40,8 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
 ---
 - name: Prepare
   hosts: all
-  become: yes
-  gather_facts: no
+  become: true
+  gather_facts: false
 
   vars:
     devices:
@@ -73,15 +73,15 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
       loop: "{{ devices }}"
       loop_control:
         label: "/dev/{{ item.name }}"
-      changed_when: no
+      changed_when: false
 
     - name: loopback device to storage file
       command: losetup /dev/{{ item.name }} /{{ item.name }}
       loop: "{{ devices }}"
-      failed_when: no
+      failed_when: false
       loop_control:
         label: "/dev/{{ item.name }} to /{{ item.name }}"
-      changed_when: no
+      changed_when: false
 ```
 
 Also see a [full explanation and example](https://buluma.github.io/how-to-use-these-roles.html) on how to use these roles.
