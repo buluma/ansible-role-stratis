@@ -1,5 +1,14 @@
 # Changelog
 
+## [Unreleased](https://github.com/buluma/ansible-role-stratis/tree/HEAD)
+
+[Full Changelog](https://github.com/buluma/ansible-role-stratis/compare/24.3.31...HEAD)
+
+**Closed issues:**
+
+- Update action [\#8](https://github.com/buluma/ansible-role-stratis/issues/8)
+- rebuild action [\#7](https://github.com/buluma/ansible-role-stratis/issues/7)
+
 ## [24.3.31](https://github.com/buluma/ansible-role-stratis/tree/24.3.31) (2024-03-26)
 
 [Full Changelog](https://github.com/buluma/ansible-role-stratis/compare/0.13.0...24.3.31)
