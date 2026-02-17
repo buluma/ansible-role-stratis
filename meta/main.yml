@@ -1,3 +1,4 @@
+---
 galaxy_info:
   author: buluma
   role_name: stratis
@@ -6,13 +7,13 @@ galaxy_info:
   company: none
   min_ansible_version: '2.12'
   platforms:
-  - name: EL
-    versions:
-    - all
+    - name: EL
+      versions:
+        - all
   - name: Fedora
     versions:
     - all
   galaxy_tags:
-  - stratis
+    - stratis
   - storage
 dependencies: []
