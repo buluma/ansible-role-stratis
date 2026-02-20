@@ -1,20 +1,21 @@
-# [stratis](#stratis)
+# [Ansible role stratis](#ansible-role-stratis)
 
 Install stratis and carves pools and filesystems.
 
-|GitHub|GitLab|Quality|Downloads|Version|Issues|Pull Requests|
-|------|------|-------|---------|-------|------|-------------|
-|[![github](https://github.com/buluma/ansible-role-stratis/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-stratis/actions)|[![gitlab](https://gitlab.com/buluma/ansible-role-stratis/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-stratis)|[![quality](https://img.shields.io/ansible/quality/59566)](https://galaxy.ansible.com/buluma/stratis)|[![downloads](https://img.shields.io/ansible/role/d/59566)](https://galaxy.ansible.com/buluma/stratis)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-stratis.svg)](https://github.com/buluma/ansible-role-stratis/releases/)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-stratis.svg)](https://github.com/buluma/ansible-role-stratis/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-stratis.svg)](https://github.com/buluma/ansible-role-stratis/pulls/)|
+|GitHub|GitLab|Downloads|Version|
+|------|------|---------|-------|
+|[![github](https://github.com/buluma/ansible-role-stratis/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-stratis/actions)|[![gitlab](https://gitlab.com/shadowwalker/ansible-role-stratis/badges/master/pipeline.svg)](https://gitlab.com/shadowwalker/ansible-role-stratis)|[![downloads](https://img.shields.io/ansible/role/d/buluma/stratis)](https://galaxy.ansible.com/buluma/stratis)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-stratis.svg)](https://github.com/buluma/ansible-role-stratis/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
-This example is taken from `molecule/default/converge.yml` and is tested on each push, pull request and release.
+This example is taken from [`molecule/default/converge.yml`](https://github.com/buluma/ansible-role-stratis/blob/master/molecule/default/converge.yml) and is tested on each push, pull request and release.
+
 ```yaml
 ---
-- name: converge
+- name: Converge
   hosts: all
-  become: yes
-  gather_facts: yes
+  become: true
+  gather_facts: true
 
   roles:
     - role: buluma.stratis
@@ -33,13 +34,14 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
     #        device: /stratis/my_pool/my_filesystem
 ```
 
-The machine needs to be prepared. In CI this is done using `molecule/default/prepare.yml`:
+The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/buluma/ansible-role-stratis/blob/master/molecule/default/prepare.yml):
+
 ```yaml
 ---
-- name: prepare
+- name: Prepare
   hosts: all
-  become: yes
-  gather_facts: no
+  become: true
+  gather_facts: false
 
   vars:
     devices:
@@ -71,37 +73,37 @@ The machine needs to be prepared. In CI this is done using `molecule/default/pre
       loop: "{{ devices }}"
       loop_control:
         label: "/dev/{{ item.name }}"
-      changed_when: no
+      changed_when: false
 
     - name: loopback device to storage file
       command: losetup /dev/{{ item.name }} /{{ item.name }}
       loop: "{{ devices }}"
-      failed_when: no
+      failed_when: false
       loop_control:
         label: "/dev/{{ item.name }} to /{{ item.name }}"
-      changed_when: no
+      changed_when: false
 ```
 
+Also see a [full explanation and example](https://buluma.github.io/how-to-use-these-roles.html) on how to use these roles.
 
 
 ## [Requirements](#requirements)
 
-- pip packages listed in [requirements.txt](https://github.com/buluma/ansible-role-stratis/blob/main/requirements.txt).
+- pip packages listed in [requirements.txt](https://github.com/buluma/ansible-role-stratis/blob/master/requirements.txt).
 
-## [Status of used roles](#status-of-requirements)
+## [State of used roles](#state-of-used-roles)
 
 The following roles are used to prepare a system. You can prepare your system in another way.
 
 | Requirement | GitHub | GitLab |
 |-------------|--------|--------|
-|[buluma.bootstrap](https://galaxy.ansible.com/buluma/bootstrap)|[![Build Status GitHub](https://github.com/buluma/ansible-role-bootstrap/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-bootstrap/actions)|[![Build Status GitLab ](https://gitlab.com/buluma/ansible-role-bootstrap/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-bootstrap)|
+|[buluma.bootstrap](https://galaxy.ansible.com/buluma/bootstrap)|[![Build Status GitHub](https://github.com/buluma/ansible-role-bootstrap/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-bootstrap/actions)|[![Build Status GitLab](https://gitlab.com/shadowwalker/ansible-role-bootstrap/badges/master/pipeline.svg)](https://gitlab.com/shadowwalker/ansible-role-bootstrap)|
 
 ## [Context](#context)
 
-This role is a part of many compatible roles. Have a look at [the documentation of these roles](https://buluma.github.io/) for further information.
+This role is part of many compatible roles. Have a look at [the documentation of these roles](https://buluma.github.io/) for further information.
 
 Here is an overview of related roles:
-
 ![dependencies](https://raw.githubusercontent.com/buluma/ansible-role-stratis/png/requirements.png "Dependencies")
 
 ## [Compatibility](#compatibility)
@@ -110,27 +112,22 @@ This role has been tested on these [container images](https://hub.docker.com/u/b
 
 |container|tags|
 |---------|----|
-|el|8|
-|fedora|all|
+|[EL](https://hub.docker.com/r/buluma/enterpriselinux)|all|
+|[Fedora](https://hub.docker.com/r/buluma/fedora)|all|
 
-The minimum version of Ansible required is 2.10, tests have been done to:
+The minimum version of Ansible required is 2.12, tests have been done on:
 
 - The previous version.
 - The current version.
 - The development version.
 
-
-
-If you find issues, please register them in [GitHub](https://github.com/buluma/ansible-role-stratis/issues)
-
-## [Changelog](#changelog)
-
-[Role History](https://github.com/buluma/ansible-role-stratis/blob/master/CHANGELOG.md)
+If you find issues, please register them on [GitHub](https://github.com/buluma/ansible-role-stratis/issues).
 
 ## [License](#license)
 
-Apache-2.0
+[Apache-2.0](https://github.com/buluma/ansible-role-stratis/blob/master/LICENSE).
 
 ## [Author Information](#author-information)
 
 [buluma](https://buluma.github.io/)
+
