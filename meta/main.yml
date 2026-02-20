@@ -5,15 +5,15 @@ galaxy_info:
   description: Install stratis and carves pools and filesystems.
   license: Apache-2.0
   company: none
-  min_ansible_version: '2.12'
+  min_ansible_version: "2.12"
   platforms:
     - name: EL
       versions:
         - all
-  - name: Fedora
-    versions:
-    - all
+    - name: Fedora
+      versions:
+        - all
   galaxy_tags:
     - stratis
-  - storage
+    - storage
 dependencies: []
