@@ -1,11 +1,11 @@
 ---
-- name: Converge
-  hosts: all
-  become: true
-  gather_facts: true
+  - name: Converge
+    hosts: all
+    become: true
+    gather_facts: true
 
-  roles:
-    - role: buluma.stratis
+    roles:
+      - role: buluma.stratis
     # It's not easy to test block-devices in CI. That's why the next block
     # of variables is commented, but left here as an example.
     #    stratis_pools:
