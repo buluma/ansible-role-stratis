@@ -12,13 +12,13 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 
 ```yaml
 ---
-  - name: Converge
-    hosts: all
-    become: true
-    gather_facts: true
+- name: Converge
+  hosts: all
+  become: true
+  gather_facts: true
 
-    roles:
-      - role: buluma.stratis
+  roles:
+  - role: buluma.stratis
     # It's not easy to test block-devices in CI. That's why the next block
     # of variables is commented, but left here as an example.
     #    stratis_pools:
@@ -38,50 +38,50 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
 
 ```yaml
 ---
-  - name: Prepare
-    hosts: all
-    become: true
-    gather_facts: false
+- name: Prepare
+  hosts: all
+  become: true
+  gather_facts: false
 
-    vars:
-      devices:
-        - name: vdc
-          major: 252
-          minor: 2
-        - name: vdd
-          major: 252
-          minor: 3
+  vars:
+    devices:
+    - name: vdc
+      major: 252
+      minor: 2
+    - name: vdd
+      major: 252
+      minor: 3
 
-    roles:
-      - role: buluma.bootstrap
+  roles:
+  - role: buluma.bootstrap
 
-    tasks:
-      - name: create storage file
-        command: dd if=/dev/zero of=/{{ item.name }} bs=1M count=1K
-        args:
-          creates: "/{{ item.name }}"
-        loop: "{{ devices }}"
-        notify:
-          - create loopback device
-          - loopback device to storage file
-        loop_control:
-          label: "/{{ item.name }}"
+  tasks:
+  - name: create storage file
+    command: dd if=/dev/zero of=/{{ item.name }} bs=1M count=1K
+    args:
+      creates: "/{{ item.name }}"
+    loop: "{{ devices }}"
+    notify:
+    - create loopback device
+    - loopback device to storage file
+    loop_control:
+      label: "/{{ item.name }}"
 
-    handlers:
-      - name: create loopback device
-        command: mknod /dev/{{ item.name }} b {{ item.major }} {{ item.minor }}
-        loop: "{{ devices }}"
-        loop_control:
-          label: "/dev/{{ item.name }}"
-        changed_when: false
+  handlers:
+  - name: create loopback device
+    command: mknod /dev/{{ item.name }} b {{ item.major }} {{ item.minor }}
+    loop: "{{ devices }}"
+    loop_control:
+      label: "/dev/{{ item.name }}"
+    changed_when: false
 
-      - name: loopback device to storage file
-        command: losetup /dev/{{ item.name }} /{{ item.name }}
-        loop: "{{ devices }}"
-        failed_when: false
-        loop_control:
-          label: "/dev/{{ item.name }} to /{{ item.name }}"
-        changed_when: false
+  - name: loopback device to storage file
+    command: losetup /dev/{{ item.name }} /{{ item.name }}
+    loop: "{{ devices }}"
+    failed_when: false
+    loop_control:
+      label: "/dev/{{ item.name }} to /{{ item.name }}"
+    changed_when: false
 ```
 
 Also see a [full explanation and example](https://buluma.github.io/how-to-use-these-roles.html) on how to use these roles.
