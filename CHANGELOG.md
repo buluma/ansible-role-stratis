@@ -9,6 +9,11 @@
 - Update action [\#8](https://github.com/buluma/ansible-role-stratis/issues/8)
 - rebuild action [\#7](https://github.com/buluma/ansible-role-stratis/issues/7)
 
+**Merged pull requests:**
+
+- Bump actions/checkout from 4 to 6 [\#11](https://github.com/buluma/ansible-role-stratis/pull/11) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump buluma/molecule-action from 5.0.1 to 5.0.4 [\#5](https://github.com/buluma/ansible-role-stratis/pull/5) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [24.3.31](https://github.com/buluma/ansible-role-stratis/tree/24.3.31) (2024-03-26)
 
 [Full Changelog](https://github.com/buluma/ansible-role-stratis/compare/0.13.0...24.3.31)
