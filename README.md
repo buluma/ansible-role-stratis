@@ -2,9 +2,9 @@
 
 Install stratis and carves pools and filesystems.
 
-|GitHub|GitLab|Downloads|Version|
-|------|------|---------|-------|
-|[![github](https://github.com/buluma/ansible-role-stratis/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-stratis/actions)|[![gitlab](https://gitlab.com/shadowwalker/ansible-role-stratis/badges/master/pipeline.svg)](https://gitlab.com/shadowwalker/ansible-role-stratis)|[![downloads](https://img.shields.io/ansible/role/d/buluma/stratis)](https://galaxy.ansible.com/buluma/stratis)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-stratis.svg)](https://github.com/buluma/ansible-role-stratis/releases/)|
+|GitHub|Issues|Pull Requests|Version|Downloads|
+|------|------|-------------|-------|---------|
+|[![github](https://github.com/buluma/ansible-role-stratis/actions/workflows/molecule.yml/badge.svg)](https://github.com/buluma/ansible-role-stratis/actions/workflows/molecule.yml)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-stratis.svg)](https://github.com/buluma/ansible-role-stratis/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-stratis.svg)](https://github.com/buluma/ansible-role-stratis/pulls/)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-stratis.svg)](https://github.com/buluma/ansible-role-stratis/releases/)|[![Ansible Role](https://img.shields.io/ansible/role/d/buluma/stratis)](https://galaxy.ansible.com/ui/standalone/roles/buluma/stratis/documentation)|
 
 ## [Example Playbook](#example-playbook)
 
@@ -18,20 +18,20 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
   gather_facts: true
 
   roles:
-  - role: buluma.stratis
-    # It's not easy to test block-devices in CI. That's why the next block
-    # of variables is commented, but left here as an example.
-    #    stratis_pools:
-    #      - name: my_pool
-    #        devices:
-    #          - /dev/vdb
-    #          - /dev/vdc
-    #    stratis_filesystems:
-    #      - name: my_filesystem
-    #        pool: my_pool
-    #    stratis_mounts:
-    #      - mountpoint: /mnt/my_mountpoint
-    #        device: /stratis/my_pool/my_filesystem
+    - role: buluma.stratis
+      # It's not easy to test block-devices in CI. That's why the next block
+      # of variables is commented, but left here as an example.
+      #    stratis_pools:
+      #      - name: my_pool
+      #        devices:
+      #          - /dev/vdb
+      #          - /dev/vdc
+      #    stratis_filesystems:
+      #      - name: my_filesystem
+      #        pool: my_pool
+      #    stratis_mounts:
+      #      - mountpoint: /mnt/my_mountpoint
+      #        device: /stratis/my_pool/my_filesystem
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/buluma/ansible-role-stratis/blob/master/molecule/default/prepare.yml):
@@ -45,43 +45,43 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
 
   vars:
     devices:
-    - name: vdc
-      major: 252
-      minor: 2
-    - name: vdd
-      major: 252
-      minor: 3
+      - name: vdc
+        major: 252
+        minor: 2
+      - name: vdd
+        major: 252
+        minor: 3
 
   roles:
-  - role: buluma.bootstrap
+    - role: buluma.bootstrap
 
   tasks:
-  - name: create storage file
-    command: dd if=/dev/zero of=/{{ item.name }} bs=1M count=1K
-    args:
-      creates: "/{{ item.name }}"
-    loop: "{{ devices }}"
-    notify:
-    - create loopback device
-    - loopback device to storage file
-    loop_control:
-      label: "/{{ item.name }}"
+    - name: create storage file
+      command: dd if=/dev/zero of=/{{ item.name }} bs=1M count=1K
+      args:
+        creates: "/{{ item.name }}"
+      loop: "{{ devices }}"
+      notify:
+        - create loopback device
+        - loopback device to storage file
+      loop_control:
+        label: "/{{ item.name }}"
 
   handlers:
-  - name: create loopback device
-    command: mknod /dev/{{ item.name }} b {{ item.major }} {{ item.minor }}
-    loop: "{{ devices }}"
-    loop_control:
-      label: "/dev/{{ item.name }}"
-    changed_when: false
+    - name: create loopback device
+      command: mknod /dev/{{ item.name }} b {{ item.major }} {{ item.minor }}
+      loop: "{{ devices }}"
+      loop_control:
+        label: "/dev/{{ item.name }}"
+      changed_when: false
 
-  - name: loopback device to storage file
-    command: losetup /dev/{{ item.name }} /{{ item.name }}
-    loop: "{{ devices }}"
-    failed_when: false
-    loop_control:
-      label: "/dev/{{ item.name }} to /{{ item.name }}"
-    changed_when: false
+    - name: loopback device to storage file
+      command: losetup /dev/{{ item.name }} /{{ item.name }}
+      loop: "{{ devices }}"
+      failed_when: false
+      loop_control:
+        label: "/dev/{{ item.name }} to /{{ item.name }}"
+      changed_when: false
 ```
 
 Also see a [full explanation and example](https://buluma.github.io/how-to-use-these-roles.html) on how to use these roles.
@@ -95,25 +95,26 @@ Also see a [full explanation and example](https://buluma.github.io/how-to-use-th
 
 The following roles are used to prepare a system. You can prepare your system in another way.
 
-| Requirement | GitHub | GitLab |
-|-------------|--------|--------|
-|[buluma.bootstrap](https://galaxy.ansible.com/buluma/bootstrap)|[![Build Status GitHub](https://github.com/buluma/ansible-role-bootstrap/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-bootstrap/actions)|[![Build Status GitLab](https://gitlab.com/shadowwalker/ansible-role-bootstrap/badges/master/pipeline.svg)](https://gitlab.com/shadowwalker/ansible-role-bootstrap)|
+| Requirement | GitHub |
+|-------------|--------|
+|[buluma.bootstrap](https://galaxy.ansible.com/buluma/bootstrap)|[![Build Status GitHub](https://github.com/buluma/ansible-role-bootstrap/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-bootstrap/actions)|
 
 ## [Context](#context)
 
 This role is part of many compatible roles. Have a look at [the documentation of these roles](https://buluma.github.io/) for further information.
 
 Here is an overview of related roles:
+
 ![dependencies](https://raw.githubusercontent.com/buluma/ansible-role-stratis/png/requirements.png "Dependencies")
 
 ## [Compatibility](#compatibility)
 
-This role has been tested on these [container images](https://hub.docker.com/u/buluma):
+This role has been tested on these [container images](https://hub.docker.com/u/robertdebock):
 
 |container|tags|
 |---------|----|
-|[EL](https://hub.docker.com/r/buluma/enterpriselinux)|all|
-|[Fedora](https://hub.docker.com/r/buluma/fedora)|all|
+|[EL](https://hub.docker.com/r/robertdebock/enterpriselinux)|all|
+|[Fedora](https://hub.docker.com/r/robertdebock/fedora)|all|
 
 The minimum version of Ansible required is 2.12, tests have been done on:
 
@@ -130,3 +131,4 @@ If you find issues, please register them on [GitHub](https://github.com/buluma/a
 ## [Author Information](#author-information)
 
 [buluma](https://buluma.github.io/)
+
