@@ -12,8 +12,8 @@
     state: started
     enabled: true
   when:
-    - ansible_facts.distribution == "Fedora"
-    - ansible_facts.distribution_major_version | int > 33
+    - ansible_facts['distribution'] == "Fedora"
+    - ansible_facts['distribution_major_version'] | int > 33
 
 - name: Start and enable stratis
   ansible.builtin.service:
