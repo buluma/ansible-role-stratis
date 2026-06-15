@@ -7,5 +7,5 @@
   tasks:
     - name: stratis version
       ansible.builtin.command:
-      changed_when: false
         cmd: stratis --version
+      changed_when: false
