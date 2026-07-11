@@ -43,45 +43,15 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
   become: true
   gather_facts: false
 
-  vars:
-    devices:
-      - name: vdc
-        major: 252
-        minor: 2
-      - name: vdd
-        major: 252
-        minor: 3
+  pre_tasks:
+    - name: Install sudo if missing
+      ansible.builtin.raw: "{{ ansible_pkg_mgr | default('dnf') }} install -y sudo"
+      become: false
+      changed_when: false
+      failed_when: false
 
   roles:
     - role: buluma.bootstrap
-
-  tasks:
-    - name: create storage file
-      command: dd if=/dev/zero of=/{{ item.name }} bs=1M count=1K
-      args:
-        creates: "/{{ item.name }}"
-      loop: "{{ devices }}"
-      notify:
-        - create loopback device
-        - loopback device to storage file
-      loop_control:
-        label: "/{{ item.name }}"
-
-  handlers:
-    - name: create loopback device
-      command: mknod /dev/{{ item.name }} b {{ item.major }} {{ item.minor }}
-      loop: "{{ devices }}"
-      loop_control:
-        label: "/dev/{{ item.name }}"
-      changed_when: false
-
-    - name: loopback device to storage file
-      command: losetup /dev/{{ item.name }} /{{ item.name }}
-      loop: "{{ devices }}"
-      failed_when: false
-      loop_control:
-        label: "/dev/{{ item.name }} to /{{ item.name }}"
-      changed_when: false
 ```
 
 Also see a [full explanation and example](https://buluma.github.io/how-to-use-these-roles.html) on how to use these roles.
@@ -109,12 +79,14 @@ Here is an overview of related roles:
 
 ## [Compatibility](#compatibility)
 
-This role has been tested on these [container images](https://hub.docker.com/u/robertdebock):
+This role has been tested on these [container images](https://hub.docker.com/u/buluma):
 
 |container|tags|
 |---------|----|
-|[EL](https://hub.docker.com/r/robertdebock/enterpriselinux)|all|
-|[Fedora](https://hub.docker.com/r/robertdebock/fedora)|all|
+|[EL](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
+|[Debian](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
+|[Fedora](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
+|[Ubuntu](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
 
 The minimum version of Ansible required is 2.12, tests have been done on:
 
@@ -132,6 +104,3 @@ If you find issues, please register them on [GitHub](https://github.com/buluma/a
 
 [buluma](https://buluma.github.io/)
 
-### Get Help
-- Report issues: https://github.com/buluma/ansible-role-stratis/issues/new
-- See docs: https://docs.ansible.com/collection/gallery/ansible-role-stratis
