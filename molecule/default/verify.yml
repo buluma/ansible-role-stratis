@@ -2,10 +2,12 @@
 - name: Verify
   hosts: all
   become: true
-  gather_facts: false
+  gather_facts: true
 
   tasks:
     - name: stratis version
       ansible.builtin.command:
         cmd: stratis --version
       changed_when: false
+      when:
+        - ansible_facts['os_family'] == "RedHat"
